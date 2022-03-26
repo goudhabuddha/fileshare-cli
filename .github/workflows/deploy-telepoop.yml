@@ -4,6 +4,8 @@ on: [push]
 
 env:
   AWS_REGION: us-west-2
+  COGNITO_USER_POOL: ${{ secrets.COGNITO_USER_POOL }}
+  SECURITY_TOKEN_SECRET: ${{ secrets.SECURITY_TOKEN_SECRET }}
 
 jobs:
   Deploy-AWS:
