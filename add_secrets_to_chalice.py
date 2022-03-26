@@ -25,4 +25,4 @@ chalice_config['environment_variables'] = shared_env
 
 
 with open(CONFIG_PATH, 'w') as f:
-    json.dump(chalice_config)
+    json.dump(chalice_config, f)
