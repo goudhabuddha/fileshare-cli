@@ -25,5 +25,6 @@ jobs:
         with:
           python-version: '3.10'
           architecture: 'x64'
+      - run: ls -R
       - name: Add secrets to Chalice app
         run: python add_secrets_to_chalice.py
