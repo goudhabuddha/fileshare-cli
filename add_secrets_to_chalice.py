@@ -15,8 +15,8 @@ except KeyError as e:
     shared_env = chalice_config['environment_variables']
 
 try:
-    shared_env['cognito_user_pool'] = os.environ['cognito_user_pool']
-    shared_env['security_token_secret'] = os.environ['security_token_secret']
+    shared_env['cognito_user_pool'] = os.environ['COGNITO_USER_POOL']
+    shared_env['security_token_secret'] = os.environ['SECURITY_TOKEN_SECRET']
 except KeyError as e:
     print(f'Required environment variable {str(e)} is missing.')
     raise KeyError
