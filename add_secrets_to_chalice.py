@@ -3,7 +3,7 @@ import json
 
 # this script runs in the github-actions workflow to gleam environment variable values from the repository secrets
 
-with open('/telepoop-backend/.chalice/config.json', 'r') as f:
+with open('telepoop-backend/.chalice/config.json', 'r') as f:
     chalice_config: dict = json.load(f)
 
 try:
