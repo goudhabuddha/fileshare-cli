@@ -9,6 +9,7 @@ env:
   DEPLOYMENT_BUCKET: ${{ secrets.DEPLOYMENT_BUCKET }}
   OUTPUT_TEMPLATE_FILE: sam-packaged.yaml
   STACK_NAME: telepoop-backend-stack
+  TELEPOOP_APP_CLIENT: ${{ secrets.TELEPOOP_APP_CLIENT }}
 
 jobs:
   Deploy-AWS:
