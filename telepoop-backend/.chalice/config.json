@@ -1,6 +1,9 @@
 {
   "version": "2.0",
   "app_name": "telepoop-backend",
+  "environment_variables": {
+    "env_a": "a"
+  },
   "stages": {
     "dev": {
       "api_gateway_stage": "api"
