@@ -1,4 +1,4 @@
-name: Deploy Telepoop
+name: Deploy Telepoop Backend
 
 on: [push]
 
@@ -6,6 +6,9 @@ env:
   AWS_REGION: us-west-2
   COGNITO_USER_POOL: ${{ secrets.COGNITO_USER_POOL }}
   SECURITY_TOKEN_SECRET: ${{ secrets.SECURITY_TOKEN_SECRET }}
+  DEPLOYMENT_BUCKET: ${{ secrets.DEPLOYMENT_BUCKET }}
+  OUTPUT_TEMPLATE_FILE: sam-packaged.yaml
+  STACK_NAME: telepoop-backend-stack
 
 jobs:
   Deploy-AWS:
@@ -30,3 +33,8 @@ jobs:
       - run: ls -R
       - name: Add secrets to Chalice app
         run: python add_secrets_to_chalice.py
+      - run: cd telepoop-backend
+      - run: pip install -r requirements.txt
+      - run: chalice package ./packages
+      - run: aws cloudformation package --template-file ./packages/sam.json --s3-bucket ${{ secrets.DEPLOYMENT_BUCKET }} --output-template-file ${{ env.OUTPUT_TEMPLATE_FILE }}
+      - run: aws cloudformation deploy --template-file ${{ env.OUTPUT_TEMPLATE_FILE }} --stack-name ${{ env.STACK_NAME }} --capabilities CAPABILITY_IAM
