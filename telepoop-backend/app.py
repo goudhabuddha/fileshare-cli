@@ -3,7 +3,7 @@ import logging
 import os
 
 import boto3
-from chalice import Chalice, UnauthorizedError, BadRequestError
+from chalice import Chalice, Response, UnauthorizedError, BadRequestError
 from pydantic import ValidationError
 
 from chalicelib.models.registration import RegistrationDetail
@@ -59,4 +59,8 @@ def register_user():
         Password=user_password
     )
 
-    return {'hello': 'world'}
+    return Response(
+        body='success',
+        status_code=200,
+        headers={'Content-Type': 'text/plain'}
+    )
