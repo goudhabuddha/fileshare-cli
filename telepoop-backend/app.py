@@ -4,7 +4,7 @@ import os
 
 import boto3
 import botocore
-from chalice import Chalice, Response, CognitoUserPoolAuthorizer, UnauthorizedError, BadRequestError
+from chalice import Chalice, Response, AuthResponse, UnauthorizedError, BadRequestError
 from pydantic import ValidationError
 
 from chalicelib.models.registration import RegistrationDetail
@@ -26,6 +26,7 @@ TELEPOOP_APP_CLIENT = os.getenv('telepoop_app_client')
 ##################
 cognito = boto3.client('cognito-idp')
 sm = boto3.client('secretsmanager')
+dynamodb = boto3.client('dynamodb')
 
 ##################
 # helper functions
@@ -35,6 +36,14 @@ def retrieve_security_token(secret: str):
     secret_string = json.loads(secret_response['SecretString'])
     return secret_string['security_token']
 
+##################
+# API routes
+##################
+@app.authorizer(ttl_seconds=1800)
+def api_auth(auth_request):
+    token: str = auth_request.token
+    #TODO:implement
+    return AuthResponse(routes=[''], principal_id='id-todo')
 
 ##################
 # API routes
