@@ -6,7 +6,7 @@ import boto3
 from chalice import Chalice, UnauthorizedError, BadRequestError
 from pydantic import ValidationError
 
-from models.registration import RegistrationDetail
+from .models.registration import RegistrationDetail
 
 ##################
 # Chalice app
