@@ -4,7 +4,7 @@ import os
 
 import boto3
 import botocore
-from chalice import Chalice, Response, UnauthorizedError, BadRequestError
+from chalice import Chalice, Response, CognitoUserPoolAuthorizer, UnauthorizedError, BadRequestError
 from pydantic import ValidationError
 
 from chalicelib.models.registration import RegistrationDetail

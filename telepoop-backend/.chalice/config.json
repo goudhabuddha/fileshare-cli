@@ -8,10 +8,9 @@
     "dev": {
       "api_gateway_stage": "api",
       "api_gateway_custom_domain": {
-        "domain_name": "api.example.com",
-        "tls_version": "TLS_1_2|TLS_1_0",
-        "certificate_arn": "arn:aws:acm:example",
-        "url_prefix": "foo"
+        "domain_name": "telepoop-api.natebayaws.com",
+        "tls_version": "TLS_1_2",
+        "certificate_arn": "arn:aws:acm:us-east-1:212329472425:certificate/ef28339f-37e8-4c9d-ab31-77d2bebb566f"
       }
     }
   }
