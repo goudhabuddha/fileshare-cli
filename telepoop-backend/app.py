@@ -3,6 +3,7 @@ import logging
 import os
 
 import boto3
+import botocore
 from chalice import Chalice, Response, UnauthorizedError, BadRequestError
 from pydantic import ValidationError
 
@@ -53,14 +54,31 @@ def register_user():
     if incoming_security_token != expected_security_token:
         raise UnauthorizedError('Invalid security token.')
     
-    cognito.sign_up(
-        ClientId=TELEPOOP_APP_CLIENT,
-        Username=user_name,
-        Password=user_password
-    )
+    try:
+        cognito.sign_up(
+            ClientId=TELEPOOP_APP_CLIENT,
+            Username=user_name,
+            Password=user_password
+        )
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'InvalidPasswordException':
+            msg = 'Password must be at least 8 characters long and contain a lowercase, uppercase, and special character.'
+            app.log.error(msg)
+            raise BadRequestError(msg)
+        elif e.response['Error']['Code'] == 'UsernameExistsException':
+            msg = 'Username already exists.'
+            app.log.error('Username already exists.')
+            raise BadRequestError(msg)
+        else:
+            raise e
 
     return Response(
         body='success',
         status_code=200,
         headers={'Content-Type': 'text/plain'}
     )
+
+
+@app.route('/upload_file', methods=['POST'])
+def upload_file():
+    pass
