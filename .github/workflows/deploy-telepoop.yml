@@ -4,12 +4,12 @@ on: [push]
 
 env:
   AWS_REGION: us-west-2
-  COGNITO_USER_POOL: us-west-2_nqe4wx7gQ
   SECURITY_TOKEN_SECRET: ${{ secrets.SECURITY_TOKEN_SECRET }}
   DEPLOYMENT_BUCKET: ${{ secrets.DEPLOYMENT_BUCKET }}
   OUTPUT_TEMPLATE_FILE: sam-packaged.yaml
   STACK_NAME: telepoop-backend-stack
   TELEPOOP_APP_CLIENT: ${{ secrets.TELEPOOP_APP_CLIENT }}
+  USERS_TABLE: ${{ secrets.USERS_TABLE }}
 
 jobs:
   Deploy-AWS:
