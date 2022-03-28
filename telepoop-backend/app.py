@@ -8,7 +8,7 @@ import botocore
 from chalice import Chalice, Response, AuthResponse, UnauthorizedError, BadRequestError
 from pydantic import ValidationError
 from pynamodb.models import Model as PynamoDbModel
-from pynamodb.attributes import UnicodeAttribute, BinaryAttribute
+from pynamodb.attributes import UnicodeAttribute, BinaryAttribute, NumberAttribute
 
 from chalicelib.models.registration import RegistrationDetail, EncodedPassword
 
@@ -43,7 +43,7 @@ class UserModel(PynamoDbModel):
     username = UnicodeAttribute(hash_key=True)
     hash_method = UnicodeAttribute()
     salt = BinaryAttribute()
-    rounds = UnicodeAttribute()
+    rounds = NumberAttribute()
     hashed = BinaryAttribute()
 
 
