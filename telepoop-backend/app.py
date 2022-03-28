@@ -40,7 +40,7 @@ class UserModel(PynamoDbModel):
     class Meta:
         table_name = USERS_TABLE
         region = AWS_REGION
-    username = UnicodeAttribute(hash_key= False)
+    username = UnicodeAttribute(hash_key=True)
     hash_method = UnicodeAttribute()
     salt = BinaryAttribute()
     rounds = UnicodeAttribute()
