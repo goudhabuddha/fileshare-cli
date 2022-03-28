@@ -58,6 +58,10 @@ def security_token_is_valid(secret: str, security_token: str) -> bool:
     return True
 
 
+def user_already_exists(username: str):
+    UserModel.get(username)
+    return False
+
 def encode_password(password: str) -> EncodedPassword:
     salt = os.urandom(32)
     rounds = 100000
@@ -89,6 +93,9 @@ def register_user() -> Response:
     if security_token_is_valid(SECURITY_TOKEN_SECRET, registration_detail.security_token) is False:
         raise UnauthorizedError('Invalid security token.')
 
+    if user_already_exists(registration_detail.username):
+        raise BadRequestError('Username already exists.')
+
     encoded_password = encode_password(registration_detail.password)
 
     new_user = UserModel(
@@ -98,12 +105,7 @@ def register_user() -> Response:
         rounds=encoded_password.rounds,
         hashed=encoded_password.hashed
     )
-
-    try:
-        new_user.save()
-    except Exception as e:
-        #TODO: find out what exception this generates on duplicate user
-        raise e
+    new_user.save()
 
     return Response(
         body='success',
