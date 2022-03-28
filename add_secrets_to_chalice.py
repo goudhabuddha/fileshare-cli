@@ -15,7 +15,8 @@ except KeyError as e:
     shared_env = chalice_config['environment_variables']
 
 try:
-    shared_env['cognito_user_pool'] = os.environ['COGNITO_USER_POOL']
+    shared_env['users_table'] = os.environ['USERS_TABLE']
+    shared_env['aws_region'] = os.environ['AWS_REGION']
     shared_env['security_token_secret'] = os.environ['SECURITY_TOKEN_SECRET']
     shared_env['telepoop_app_client'] = os.environ['TELEPOOP_APP_CLIENT']
 except KeyError as e:
