@@ -59,8 +59,12 @@ def security_token_is_valid(secret: str, security_token: str) -> bool:
 
 
 def user_already_exists(username: str):
-    UserModel.get(username)
-    return False
+    try:
+        UserModel.get(username)
+        return True
+    except UserModel.DoesNotExist:
+        return False
+    
 
 def encode_password(password: str) -> EncodedPassword:
     salt = os.urandom(32)
