@@ -17,7 +17,8 @@ except KeyError as e:
 try:
     shared_env['users_table'] = os.environ['USERS_TABLE']
     shared_env['aws_region'] = os.environ['AWS_REGION']
-    shared_env['security_token_secret'] = os.environ['SECURITY_TOKEN_SECRET']
+    shared_env['telepoop_jwt_key'] = os.environ['TELEPOOP_JWT_KEY']
+    shared_env['telepoop_security_token'] = os.environ['TELEPOOP_SECURITY_TOKEN']
     shared_env['telepoop_app_client'] = os.environ['TELEPOOP_APP_CLIENT']
 except KeyError as e:
     print(f'Required environment variable {str(e)} is missing.')

@@ -10,6 +10,7 @@ env:
   STACK_NAME: telepoop-backend-stack
   TELEPOOP_APP_CLIENT: ${{ secrets.TELEPOOP_APP_CLIENT }}
   USERS_TABLE: ${{ secrets.USERS_TABLE }}
+  TELEPOOP_JWT_KEY: ${{ secrets.TELEPOOP_JWT_KEY }}
 
 jobs:
   Deploy-AWS:
