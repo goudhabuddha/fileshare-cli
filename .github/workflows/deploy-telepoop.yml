@@ -4,11 +4,10 @@ on: [push]
 
 env:
   AWS_REGION: us-west-2
-  SECURITY_TOKEN_SECRET: ${{ secrets.SECURITY_TOKEN_SECRET }}
+  TELEPOOP_SECURITY_TOKEN: ${{ secrets.TELEPOOP_SECURITY_TOKEN }}
   DEPLOYMENT_BUCKET: ${{ secrets.DEPLOYMENT_BUCKET }}
   OUTPUT_TEMPLATE_FILE: sam-packaged.yaml
   STACK_NAME: telepoop-backend-stack
-  TELEPOOP_APP_CLIENT: ${{ secrets.TELEPOOP_APP_CLIENT }}
   USERS_TABLE: ${{ secrets.USERS_TABLE }}
   TELEPOOP_JWT_KEY: ${{ secrets.TELEPOOP_JWT_KEY }}
 
